@@ -10,15 +10,15 @@
         const root = document.getElementById("root");
         function App() {
             const [amount, setAmount] = React.useState(0);
-            const [flipped, setFlipped] = React.useState(false);
+            const [inverted, setInverted] = React.useState(false);
 
             const onChange = (event) => {
                 setAmount(event.target.value);
             }
             const reset = () => setAmount(0);
-            const onFlip = () => {
+            const onInvert = () => {
                 reset();
-                setFlipped((current) => !current);
+                setInverted((current) => !current);
             };
             
             return (
@@ -26,29 +26,29 @@
                 <h1>Super Converter</h1>
                 <label htmlFor="amount">amount</label>
                 <input 
-                    value={flipped ? amount*60 : amount}
+                    value={inverted ? amount*60 : amount}
                     id="amount"
                     placeholder="amount"
                     type="number"
                     onChange={onChange}
-                    disabled={flipped}>
+                    disabled={inverted}>
                 </input>
                 
                 <div>
                     <label htmlFor="hours">Hours</label>
                     <input 
-                        value={flipped? amount : Math.round(amount/60)}
+                        value={inverted? amount : Math.round(amount/60)}
                         id="hours"
                         placeholder="Hours"
                         type="number"
-                        disabled={!flipped}
+                        disabled={!inverted}
                         onChange={onChange}
                         >
                         
                     </input>
                 </div>
                 <button onClick={reset}>Reset</button>
-                <button onClick={onFlip}>Flip</button>
+                <button onClick={onInvert}>{inverted? "Turn back":"Invert"}</button>
             </div>);
         }
         ReactDOM.render(<App />, root);
